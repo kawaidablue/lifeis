@@ -872,10 +872,10 @@ body {
         padding: 10px 10px 0 10px;
     }
     .hero__center {
-        top: 25%;
+        top: 22%;
         left: 50%;
-        width: 140px;
-        height: 140px;
+        width: 130px;
+        height: 130px;
     }
     .hero__center h2 {
         font-size: 24px;
@@ -886,5 +886,8 @@ body {
     }
     .voice-wrap__body__left__topsp__bottom {
         width: 45%; 
+    }
+    .logo__right {
+        width: 60px;
     }
 }
