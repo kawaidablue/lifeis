@@ -829,7 +829,7 @@ body {
         display: none;
     }
     .voice-wrap {
-        padding: 40px 0 40px 0;
+        padding: 60px 0 60px 0;
     }
     .voice-wrap__body {
         flex-direction: column;
@@ -1003,9 +1003,14 @@ body {
         margin-bottom: 20px;
     }
     .next-wrap {
-        padding: 30px 0 30px 0;
+        padding: 50px 0 50px 0;
     }
     .txt {
         line-height: 1.6;
+    }
+    .slant-barnext {
+        margin: 2.5vw 0.2vw;
+        width: 60px;
+        height: 5px;
     }
 }
