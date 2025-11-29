@@ -1,19 +1,70 @@
-// ===== スライドイン処理 =====
 // video.js
 
+// ===== 動画の自動再生 =====
 document.addEventListener('DOMContentLoaded', () => {
-  const video = document.querySelector('.js-video video');
-  if (!video) return;
+  const videoWrappers = document.querySelectorAll('.js-video');
+  if (!videoWrappers.length) return;
 
-  // スマホでもインライン再生できるように
-  video.setAttribute('playsinline', '');
-  video.setAttribute('webkit-playsinline', '');
+  // ---- スマホ判定（iPhone / iPad / Android） ----
+  const ua = navigator.userAgent;
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
 
-  // 自動再生はさせない（タップで再生）
-  video.removeAttribute('autoplay');
-  video.muted = true; // ミュートはつけたままでOK
+  // ★ スマホでは「自動再生しない」＝ユーザーのタップでだけ再生させる
+  if (isMobile) {
+    videoWrappers.forEach(wrapper => {
+      const video = wrapper.querySelector('video');
+      if (!video) return;
+
+      // 念のため自動再生を止めておく
+      video.pause();
+      video.removeAttribute('autoplay');
+      // iOS 用のインライン再生指定がある前提
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+    });
+    // ここで return するので、IntersectionObserver は使わない
+    return;
+  }
+
+  // ---- ここから PC 用：IntersectionObserver で自動再生 ----
+
+  // IntersectionObserver が使えない古いブラウザ用フォールバック
+  if (!('IntersectionObserver' in window)) {
+    videoWrappers.forEach(wrapper => {
+      const video = wrapper.querySelector('video');
+      if (!video) return;
+      video.play().catch(() => {});
+    });
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target.querySelector('video');
+      if (!video) return;
+
+      if (entry.isIntersecting) {
+        // 画面に入ったら再生（PC）
+        const p = video.play();
+        if (p !== undefined) {
+          p.catch(() => {
+            // 自動再生ブロックされた場合は無視
+          });
+        }
+      } else {
+        // 画面外に出たら一時停止
+        video.pause();
+      }
+    });
+  }, {
+    threshold: 0.8 // 要素の8割くらい見えたら「見えた」と判断
+  });
+
+  videoWrappers.forEach(wrapper => io.observe(wrapper));
 });
-// slidein.js
+
+
+// ===== スライドイン処理 =====
 document.addEventListener('DOMContentLoaded', () => {
   const slideTargets = document.querySelectorAll('.js-slide-left');
   if (!slideTargets.length) return;
