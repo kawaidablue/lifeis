@@ -448,7 +448,7 @@ body {
     width: 47%;
   }
   .video-wrapper {
-    width: 100%;
+    width: 550px;
     height: auto;
   }
     .video-wrapper video {
@@ -884,6 +884,9 @@ body {
     flex-direction: column;
     width:60%;
 }
+.video-wrapper {
+    width: 90%;
+  }
 }
 @media (max-width:500px){
     .title {
