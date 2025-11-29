@@ -1,4 +1,19 @@
 // ===== スライドイン処理 =====
+// video.js
+
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.querySelector('.js-video video');
+  if (!video) return;
+
+  // スマホでもインライン再生できるように
+  video.setAttribute('playsinline', '');
+  video.setAttribute('webkit-playsinline', '');
+
+  // 自動再生はさせない（タップで再生）
+  video.removeAttribute('autoplay');
+  video.muted = true; // ミュートはつけたままでOK
+});
+// slidein.js
 document.addEventListener('DOMContentLoaded', () => {
   const slideTargets = document.querySelectorAll('.js-slide-left');
   if (!slideTargets.length) return;
