@@ -921,9 +921,12 @@ body {
         margin-top: 10px;
         width:20px;
     }
+    .logo {
+        padding: 20px 0;
+    }
     .logo a {
         display: block;
-        width: 120px;
+        width: 80px;
         margin: 0 auto;
     }
     .copyright {
