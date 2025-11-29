@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, {
-      threshold: 0.5 // 要素の50%以上が見えたら「見えた」と判断
+      threshold: 0.8 // 要素の50%以上が見えたら「見えた」と判断
     });
   
     videoWrappers.forEach(wrapper => io.observe(wrapper));
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.unobserve(entry.target);
       });
     }, {
-      threshold: 0.3 // 要素の30%くらい見えたら発火
+      threshold: 0.5 // 要素の30%くらい見えたら発火
     });
   
     slideTargets.forEach(el => io.observe(el));
